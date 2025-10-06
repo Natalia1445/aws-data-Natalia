@@ -1,55 +1,257 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portafolio de Benjamin</title>
-
-  <!-- Bootstrap CSS -->
-  <link 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-    rel="stylesheet"
-  >
-
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .container {
-      margin-top: 80px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida a mi portafolio</title>
+    <!-- Bootstrap CSS - Framework para diseño responsive -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* ========================================
+           VARIABLES DE COLORES
+           Aquí defines la paleta de colores del sitio
+           Puedes cambiar estos valores para modificar todos los colores a la vez
+        ======================================== */
+        :root {
+            --color-primary: #9BA8BE;    /* Azul/morado claro - fondo principal */
+            --color-dark-1: #491F25;     /* Morado oscuro - header y elementos principales */
+            --color-dark-2: #7A2C34;     /* Vino/burgundy - botones y acentos */
+            --color-light: #B49AA9;      /* Rosa/malva - degradados */
+        }
+        
+        /* ========================================
+           ESTILOS GENERALES DEL BODY
+        ======================================== */
+        body {
+            /* Degradado de fondo que va de primary a light */
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-light) 100%);
+            min-height: 100vh;  /* Altura mínima del 100% de la pantalla */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* ========================================
+           SECCIÓN DEL HEADER (Portafolio de Natalia)
+        ======================================== */
+        .header-section {
+            background-color: var(--color-dark-1);  /* Color de fondo oscuro */
+            color: white;
+            padding: 4rem 0 3rem 0;  /* Espaciado arriba: 4rem, abajo: 3rem */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);  /* Sombra sutil debajo del header */
+        }
+        
+        /* Título principal del header */
+        .header-section h1 {
+            font-size: 2.5rem;      /* Tamaño grande para el título */
+            font-weight: 700;       /* Texto en negrita */
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Subtítulo del header */
+        .header-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;  /* Ligeramente transparente para diferenciarlo del título */
+        }
+        
+        /* ========================================
+           SECCIÓN DE CONTENIDO PRINCIPAL
+        ======================================== */
+        .content-section {
+            padding: 3rem 0;  /* Espaciado vertical de la sección */
+        }
+        
+        /* Título "Explora los siguientes proyectos" */
+        .section-title {
+            color: var(--color-dark-1);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        /* ========================================
+           ESTILOS DEL CARRUSEL
+        ======================================== */
+        .carousel {
+            max-width: 900px;       /* Ancho máximo del carrusel */
+            margin: 0 auto;         /* Centra el carrusel horizontalmente */
+            background: white;
+            border-radius: 15px;    /* Esquinas redondeadas */
+            overflow: hidden;       /* Oculta contenido que sobresale */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);  /* Sombra pronunciada */
+        }
+        
+        .carousel-inner {
+            min-height: 400px;  /* Altura mínima para mantener consistencia */
+        }
+        
+        /* Cada slide del carrusel */
+        .carousel-item {
+            padding: 4rem 3rem;  /* Espaciado interno */
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+        
+        /* ========================================
+           TARJETAS DE PROYECTOS DENTRO DEL CARRUSEL
+        ======================================== */
+        .project-card {
+            padding: 2rem;
+        }
+        
+        /* Título del proyecto (h3) */
+        .project-card h3 {
+            color: var(--color-dark-2);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Descripción del proyecto */
+        .project-card p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* ========================================
+           BOTÓN/ENLACE "VER PROYECTO"
+           AQUÍ ES DONDE CAMBIAS LOS LINKS DE TUS PROYECTOS
+        ======================================== */
+        .project-link {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--color-dark-2);
+            color: white;
+            text-decoration: none;       /* Quita el subrayado del enlace */
+            border-radius: 25px;         /* Botón redondeado */
+            transition: all 0.3s ease;   /* Animación suave al hacer hover */
+            font-weight: 600;
+        }
+        
+        /* Efecto cuando pasas el mouse sobre el botón */
+        .project-link:hover {
+            background-color: var(--color-dark-1);
+            color: white;
+            transform: translateY(-2px);  /* Sube ligeramente el botón */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* ========================================
+           CONTROLES DEL CARRUSEL (Flechas)
+        ======================================== */
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: var(--color-dark-2);
+            border-radius: 50%;  /* Los hace circulares */
+            padding: 20px;
+        }
+        
+        /* Indicadores (puntos) debajo del carrusel */
+        .carousel-indicators button {
+            background-color: var(--color-dark-2);
+        }
+    </style>
 </head>
 <body>
+    <!-- ========================================
+         HEADER: Encabezado con título principal
+    ======================================== -->
+    <header class="header-section">
+        <div class="container text-center">
+            <h1>Portafolio de Natalia</h1>
+            <p>Bienvenida a mi portafolio</p>
+        </div>
+    </header>
 
-  <!-- Encabezado -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Portafolio de Natalia</a>
-    </div>
-  </nav>
+    <!-- ========================================
+         SECCIÓN PRINCIPAL: Carrusel de proyectos
+    ======================================== -->
+    <section class="content-section">
+        <div class="container">
+            <!-- Título de la sección -->
+            <h2 class="section-title">Explora los siguientes proyectos</h2>
+            
+            <!-- CARRUSEL DE BOOTSTRAP
+                 id="projectCarousel" - Identificador único para JavaScript
+                 data-bs-ride="carousel" - Hace que el carrusel sea automático
+            -->
+            <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
+                
+                <!-- INDICADORES (puntos debajo del carrusel)
+                     data-bs-slide-to="0" indica el número de slide (empieza en 0)
+                -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2"></button>
+                    <!-- PARA AGREGAR MÁS PROYECTOS: Copia esta línea y cambia data-bs-slide-to="3", "4", etc. -->
+                </div>
+                
+                <!-- CONTENEDOR DE SLIDES -->
+                <div class="carousel-inner">
+                    
+                    <!-- ===== PROYECTO 1 ===== 
+                         class="active" indica que este es el slide inicial
+                    -->
+                    <div class="carousel-item active">
+                        <div class="project-card">
+                            <h3>Proyecto 1</h3>
+                            <p>Descripción del primer proyecto destacado</p>
+                            <!-- IMPORTANTE: Cambia href="#" por tu URL real -->
+                            <a href="#" class="project-link">Ver Proyecto</a>
+                        </div>
+                    </div>
+                    
+                    <!-- ===== PROYECTO 2 ===== -->
+                    <div class="carousel-item">
+                        <div class="project-card">
+                            <h3>Proyecto 2</h3>
+                            <p>Descripción del segundo proyecto destacado</p>
+                            <!-- IMPORTANTE: Cambia href="#" por tu URL real -->
+                            <a href="#" class="project-link">Ver Proyecto</a>
+                        </div>
+                    </div>
+                    
+                    <!-- ===== PROYECTO 3 ===== -->
+                    <div class="carousel-item">
+                        <div class="project-card">
+                            <h3>Proyecto 3</h3>
+                            <p>Descripción del tercer proyecto destacado</p>
+                            <!-- IMPORTANTE: Cambia href="#" por tu URL real -->
+                            <a href="#" class="project-link">Ver Proyecto</a>
+                        </div>
+                    </div>
+                    
+                    <!-- PARA AGREGAR MÁS PROYECTOS:
+                         Copia todo el bloque desde <div class="carousel-item"> hasta </div>
+                         y pégalo aquí debajo. Recuerda NO poner class="active"
+                         
+                         Ejemplo:
+                         <div class="carousel-item">
+                             <div class="project-card">
+                                 <h3>Proyecto 4</h3>
+                                 <p>Descripción del cuarto proyecto</p>
+                                 <a href="TU-LINK-AQUI" class="project-link">Ver Proyecto</a>
+                             </div>
+                         </div>
+                    -->
+                </div>
+                
+                <!-- BOTÓN ANTERIOR (flecha izquierda) -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                
+                <!-- BOTÓN SIGUIENTE (flecha derecha) -->
+                <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+    </section>
 
-  <!-- Contenido principal -->
-  <div class="container text-center">
-    <h1 class="my-5">Bienvenido a mi portafolio</h1>
-    <p class="lead">Explora los siguientes proyectos:</p>
-
-    <div class="list-group">
-      <a href="proyecto1.html" class="list-group-item list-group-item-action">
-        Proyecto 1 - Automatización con Python
-      </a>
-      <a href="proyecto2.html" class="list-group-item list-group-item-action">
-        Proyecto 2 - DevOps & CI/CD
-      </a>
-      <a href="proyecto3.html" class="list-group-item list-group-item-action">
-        Proyecto 3 - Visualización de Datos
-      </a>
-    </div>
-  </div>
-
-  <!-- Bootstrap JS -->
-  <script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-  </script>
+    <!-- Bootstrap JavaScript - Necesario para que funcione el carrusel -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
