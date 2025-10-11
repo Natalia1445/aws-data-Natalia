@@ -1,0 +1,175 @@
+import pandas as pd 
+import streamlit as st
+import plotly.express as px
+import matplotlib.pyplot as plt
+ 
+st.set_page_config(page_title="Adicción de Alumnos a Redes Sociales Dashboard", layout="wide")
+ 
+@st.cache_data
+def load_data():
+
+    return pd.read_csv("Students Social Media Addiction.csv")
+
+
+df = load_data()
+ 
+st.title("Adicción de redes sociales de estudiantes")
+# Renombrar los nombres de las columnas a unos más cortos 
+df = df.rename(columns={
+    'Student_ID': 'id',
+    'Age': 'age',
+    'Gender': 'gender',
+    'Academic_Level': 'level',
+    'Country': 'country',
+    'Avg_Daily_Usage_Hours': 'daily_hours',
+    'Most_Used_Platform': 'platform',
+    'Affects_Academic_Performance': 'affects_academic',
+    'Sleep_Hours_Per_Night': 'sleep_hours',
+    'Mental_Health_Score': 'mental_score',
+    'Relationship_Status': 'relationship',
+    'Conflicts_Over_Social_Media': 'conflicts',
+    'Addicted_Score': 'addiction_score'
+})
+
+# Sidebar
+st.sidebar.header("🔍 Filtros")
+
+
+# Filtros
+
+gender_filter = st.sidebar.multiselect("Género", options=df['gender'].unique(), default=df['gender'].unique())
+level_filter = st.sidebar.multiselect("Nivel Académico", options=df['level'].unique(), default=df['level'].unique())
+platform_filter = st.sidebar.multiselect("Plataforma Más Usada", options=df['platform'].unique(), default=df['platform'].unique())
+
+# Sliders
+hours_range = st.sidebar.slider("Horas de Uso Diario",min_value=float(df['daily_hours'].min()),max_value=float(df['daily_hours'].max()), value=(float(df['daily_hours'].min()), float(df['daily_hours'].max())))
+
+
+addiction_range = st.sidebar.slider("Score de Adicción",min_value=int(df['addiction_score'].min()),max_value=int(df['addiction_score'].max()),
+    value=(int(df['addiction_score'].min()), int(df['addiction_score'].max())))
+
+
+
+
+filtered_df = df[ (df['gender'].isin(gender_filter)) & (df['level'].isin(level_filter)) &(df['platform'].isin(platform_filter)) &(df['daily_hours'].between(hours_range[0], hours_range[1])) &(df['addiction_score'].between(addiction_range[0], addiction_range[1]))]
+
+# Título
+st.title("📱 Dashboard Adición a las redes sociales de estudiantes de todo el mundo")
+st.markdown("### Análisis del impacto del uso de celular en estudiantes")
+
+
+# KPI
+col1, col2, col3, col4, col5 = st.columns(5)
+
+total_students = len(filtered_df)
+avg_hours = filtered_df['daily_hours'].mean()
+avg_addiction = filtered_df['addiction_score'].mean()
+avg_sleep = filtered_df['sleep_hours'].mean()
+avg_mental = filtered_df['mental_score'].mean()
+
+col1.metric("👥 Estudiantes", f"{total_students:,}")
+col2.metric("⏰ Horas/Día", f"{avg_hours:.1f}h")
+col3.metric("🎯 Score Adicción", f"{avg_addiction:.1f}")
+col4.metric("😴 Horas Sueño", f"{avg_sleep:.1f}h")
+col5.metric("🧠 Salud Mental", f"{avg_mental:.1f}")
+
+
+# Fila 1
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown("#### 👫 Distribución por Género")
+    gender_counts = filtered_df['gender'].value_counts()
+    fig1 = px.pie(
+        values=gender_counts.values, 
+        names=gender_counts.index,
+        hole=0.3
+    )
+    fig1.update_traces(textposition='inside', textinfo='percent+label')
+    st.plotly_chart(fig1, use_container_width=True)
+
+with col2:
+    st.markdown("#### 📚 Nivel Académico")
+    level_counts = filtered_df['level'].value_counts()
+    fig2 = px.bar(
+        x=level_counts.index, 
+        y=level_counts.values,
+        labels={'x': 'Nivel', 'y': 'Cantidad'},
+        color=level_counts.values,
+    )
+    fig2.update_layout(showlegend=False)
+    st.plotly_chart(fig2, use_container_width=True)
+
+with col3:
+    st.markdown("#### 📱 Plataformas Más Usadas")
+    platform_counts = filtered_df['platform'].value_counts().head(5)
+    fig3 = px.bar(
+        x=platform_counts.values,
+        y=platform_counts.index,
+        orientation='h',
+        labels={'x': 'Cantidad', 'y': 'Plataforma'},
+        color=platform_counts.values,
+        color_continuous_scale='Blues'
+    )
+    st.plotly_chart(fig3, use_container_width=True)
+
+
+
+# Segunda filas
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("#### ⚠️ Impacto Académico")
+    academic_impact = filtered_df['affects_academic'].value_counts()
+    colors = ['#ef476f' if x == 'Yes' else '#06d6a0' for x in academic_impact.index]
+    fig4 = px.bar(
+        x=academic_impact.index,
+        y=academic_impact.values,
+        labels={'x': 'Afecta Rendimiento', 'y': 'Cantidad'},
+        color=academic_impact.index,
+    
+    )
+    st.plotly_chart(fig4, use_container_width=True)
+
+with col2:
+    st.markdown("#### 💔 Estado de Relaciones")
+    relationship_counts = filtered_df['relationship'].value_counts()
+    fig5 = px.pie(
+        values=relationship_counts.values,
+        names=relationship_counts.index,
+ 
+    )
+    st.plotly_chart(fig5, use_container_width=True)
+
+
+
+# Gráficos de correlación
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("#### 📊 Horas de Uso vs Score de Adicción")
+    fig6 = px.scatter(
+        filtered_df,
+        x='daily_hours',
+        y='addiction_score',
+        color='gender',
+        size='mental_score',
+        hover_data=['level', 'platform'],
+        labels={'daily_hours': 'Horas Diarias', 'addiction_score': 'Score Adicción'},
+        #color_discrete_sequence=px.colors.qualitative.Bold
+    )
+    st.plotly_chart(fig6, use_container_width=True)
+
+with col2:
+    st.markdown("#### 😴 Horas de Sueño vs Salud Mental")
+    fig7 = px.scatter(
+        filtered_df,
+        x='sleep_hours',
+        y='mental_score',
+        color='affects_academic',
+        size='daily_hours',
+        hover_data=['gender', 'level'],
+        labels={'sleep_hours': 'Horas de Sueño', 'mental_score': 'Score Salud Mental'},
+        color_discrete_map={'Yes': 'blue', 'No': 'red'}
+    )
+    st.plotly_chart(fig7, use_container_width=True)
