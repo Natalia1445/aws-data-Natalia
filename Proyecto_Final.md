@@ -1,6 +1,6 @@
 # 📚 ETL Project: Goodreads vs Amazon  Detector de discrepancias en el Rating
 
-## 🎯 Objetivo del Proyecto
+## Objetivo del Proyecto
 
 Comparar ratings de libros entre Goodreads (comunidad de lectores) y Amazon (plataforma de compras) para identificar discrepancias y analizar patrones de comportamiento entre ambas audiencias.
 
@@ -9,7 +9,7 @@ Comparar ratings de libros entre Goodreads (comunidad de lectores) y Amazon (pla
 ## Resultados del Análisis de Viabilidad
 
 **Matching Validado:**
-- ✅ **~1,000 matches** de alta calidad (HIGH quality)
+- **~1,000 matches** de alta calidad (HIGH quality)
 
 **Estrategia de Matching:**
 - Normalización de títulos (remoción de artículos, puntuación, subtítulos)
