@@ -1,0 +1,45 @@
+import json
+import boto3
+import pandas as pd
+import io
+ 
+# === Conexión con s3 ===
+s3 = boto3.client("s3")
+ 
+def lambda_handler(event, context):
+    bucket = "xideralaws-curso-benjamin"
+    key = "data.csv"
+    # === Genera nuevo archivo ===
+    output_key = "output/data_transformed.csv"
+    
+    try:
+        # === Lee archivo original ===
+        obj = s3.get_object(Bucket=bucket, Key=key)
+        body = obj["Body"].read()
+        df = pd.read_csv(io.BytesIO(body))
+        
+        # === Se procesa el archivo ===
+        df_procesado = transformar_fecha(df)
+        
+        # === Se guarda el archivo procesado ===
+        buffer = io.StringIO()
+        df_procesado.to_csv(buffer, index=False)
+        s3.put_object(Bucket=bucket, Key=output_key, Body=buffer.getvalue())
+        
+        head_response = df_procesado.head(5).to_dict(orient="records")  # Changed df to df_procesado
+ 
+        return {
+            'statusCode': 200,
+            'body': f"Archivo procesado y guardado en s3://{bucket}/{output_key}",  # Changed key to output_key
+            "preview": head_response
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+
+def transformar_fecha(df):
+  # Convert duration from ms to minutes
+    df['duracion_minutos'] = df['duration_ms'] / 60000
+    return df

@@ -1,0 +1,73 @@
+import pymysql
+import pandas as pd
+import awswrangler as wr
+import boto3, os, json
+from datetime import datetime
+ 
+s3 = boto3.client("s3")
+ 
+def get_last_state(bucket, key):
+    """Lee el último estado guardado en S3."""
+    try:
+        obj = s3.get_object(Bucket=bucket, Key=key)
+        return json.loads(obj["Body"].read())
+    except s3.exceptions.NoSuchKey:
+        return {"last_id": 0}  # valor inicial
+ 
+def save_state(bucket, key, state):
+    """Guarda el estado actual en S3."""
+    s3.put_object(Bucket=bucket, Key=key, Body=json.dumps(state))
+ 
+def lambda_handler(event, context):
+    db_user = os.environ["DB_USER"]
+    db_pass = os.environ["DB_PASS"]
+    db_host = os.environ["DB_HOST"]
+    db_name = os.environ["DB_NAME"]
+    bucket = "xideralaws-curso-project"
+ 
+    conn = pymysql.connect(
+        host=db_host,
+        user=db_user,
+        password=db_pass,
+        database=db_name
+    )
+ 
+    # Leer el último ID procesado
+    state_key = "state/clientes_state.json"
+    state = get_last_state(bucket, state_key)
+    last_id = state["last_id"]
+ 
+    # Traer solo los nuevos registros
+    query = f"SELECT * FROM personas WHERE id > {last_id} ORDER BY id;"
+    df = pd.read_sql(query, conn)
+ 
+    if df.empty:
+        print("No hay nuevos datos.")
+        return {"statusCode": 200, "body": json.dumps({"message": "Sin nuevos datos."})}
+ 
+    # Subir al bucket S3 como delta (append)
+    now = datetime.now().strftime("%Y%m%d_%H%M%S")
+    path = f"s3://{bucket}/raw_data/personas_delta_{now}/"
+ 
+    wr.s3.to_parquet(
+        df=df,
+        path=path,
+        compression="snappy",
+        dataset=True,
+        mode="append"
+    )
+ 
+    conn.close()
+    new_last_id = int(df["id"].max())  # 👈 convierte el valor a int nativo
+    save_state(bucket, state_key, {"last_id": int(new_last_id)})
+ 
+    return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "message": f"Delta Parquet subido a {path}",
+            "rows": int(len(df)),           # 👈 asegúrate que también sea int
+            "last_id": new_last_id
+        })
+    }
+ 
+ 
