@@ -3,289 +3,660 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenida a mi portafolio</title>
-    <!-- Bootstrap CSS - Framework para diseño responsive -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Portafolio Data</title>
     <style>
-        /* ========================================
-           VARIABLES DE COLORES
-           Aquí defines la paleta de colores del sitio
-           Puedes cambiar estos valores para modificar todos los colores a la vez
-        ======================================== */
-        :root {
-            --color-primary: #9BA8BE;    /* Azul/morado claro - fondo principal */
-            --color-dark-1: #491F25;     /* Morado oscuro - header y elementos principales */
-            --color-dark-2: #7A2C34;     /* Vino/burgundy - botones y acentos */
-            --color-light: #B49AA9;      /* Rosa/malva - degradados */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        /* ========================================
-           ESTILOS GENERALES DEL BODY
-        ======================================== */
+
         body {
-            /* Degradado de fondo que va de primary a light */
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-light) 100%);
-            min-height: 100vh;  /* Altura mínima del 100% de la pantalla */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Space Mono', monospace;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.5;
         }
-        
-        /* ========================================
-           SECCIÓN DEL HEADER (Portafolio de Natalia)
-        ======================================== */
-        .header-section {
-            background-color: var(--color-dark-1);  /* Color de fondo oscuro */
-            color: white;
-            padding: 4rem 0 3rem 0;  /* Espaciado arriba: 4rem, abajo: 3rem */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);  /* Sombra sutil debajo del header */
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 40px;
         }
-        
-        /* Título principal del header */
-        .header-section h1 {
-            font-size: 2.5rem;      /* Tamaño grande para el título */
-            font-weight: 700;       /* Texto en negrita */
-            margin-bottom: 0.5rem;
+
+        header {
+            margin-bottom: 100px;
+            position: relative;
         }
-        
-        /* Subtítulo del header */
-        .header-section p {
-            font-size: 1.2rem;
-            opacity: 0.9;  /* Ligeramente transparente para diferenciarlo del título */
-        }
-        
-        /* ========================================
-           SECCIÓN DE CONTENIDO PRINCIPAL
-        ======================================== */
-        .content-section {
-            padding: 3rem 0;  /* Espaciado vertical de la sección */
-        }
-        
-        /* Título "Explora los siguientes proyectos" */
-        .section-title {
-            color: var(--color-dark-1);
-            font-size: 1.8rem;
+
+        .header-tag {
+            font-size: 0.8em;
+            letter-spacing: 3px;
+            color: #6B182C;
             font-weight: 600;
-            margin-bottom: 2rem;
-            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 15px;
         }
-        
-        /* ========================================
-           ESTILOS DEL CARRUSEL
-        ======================================== */
-        .carousel {
-            max-width: 900px;       /* Ancho máximo del carrusel */
-            margin: 0 auto;         /* Centra el carrusel horizontalmente */
-            background: white;
-            border-radius: 15px;    /* Esquinas redondeadas */
-            overflow: hidden;       /* Oculta contenido que sobresale */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);  /* Sombra pronunciada */
+
+        header h1 {
+            font-size: 5em;
+            font-weight: 900;
+            line-height: 0.95;
+            margin-bottom: 20px;
+            word-spacing: 100vw;
+            letter-spacing: -2px;
         }
-        
-        .carousel-inner {
-            min-height: 400px;  /* Altura mínima para mantener consistencia */
-        }
-        
-        /* Cada slide del carrusel */
-        .carousel-item {
-            padding: 4rem 3rem;  /* Espaciado interno */
-            text-align: center;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        }
-        
-        /* ========================================
-           TARJETAS DE PROYECTOS DENTRO DEL CARRUSEL
-        ======================================== */
-        .project-card {
-            padding: 2rem;
-        }
-        
-        /* Título del proyecto (h3) */
-        .project-card h3 {
-            color: var(--color-dark-2);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        /* Descripción del proyecto */
-        .project-card p {
+
+        .header-subtitle {
+            font-size: 1em;
             color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+            font-weight: 400;
+            max-width: 500px;
+            letter-spacing: 1px;
         }
-        
-        /* ========================================
-           BOTÓN/ENLACE "VER PROYECTO"
-           AQUÍ ES DONDE CAMBIAS LOS LINKS DE TUS PROYECTOS
-        ======================================== */
-        .project-link {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background-color: var(--color-dark-2);
-            color: white;
-            text-decoration: none;       /* Quita el subrayado del enlace */
-            border-radius: 25px;         /* Botón redondeado */
-            transition: all 0.3s ease;   /* Animación suave al hacer hover */
+
+        .projects-wrapper {
+            margin-bottom: 150px;
+        }
+
+        .section-heading {
+            font-size: 0.9em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 50px;
             font-weight: 600;
         }
-        
-        /* Efecto cuando pasas el mouse sobre el botón */
-        .project-link:hover {
-            background-color: var(--color-dark-1);
+
+        .project-featured {
+            background: #6B182C;
             color: white;
-            transform: translateY(-2px);  /* Sube ligeramente el botón */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 60px 50px;
+            margin-bottom: 80px;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
         }
-        
-        /* ========================================
-           CONTROLES DEL CARRUSEL (Flechas)
-        ======================================== */
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            background-color: var(--color-dark-2);
-            border-radius: 50%;  /* Los hace circulares */
-            padding: 20px;
+
+        .project-featured::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 200px;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.03) 100%);
         }
-        
-        /* Indicadores (puntos) debajo del carrusel */
-        .carousel-indicators button {
-            background-color: var(--color-dark-2);
+
+        .featured-label {
+            font-size: 0.7em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .featured-title {
+            font-size: 2.5em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .featured-desc {
+            font-size: 1em;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            max-width: 600px;
+        }
+
+        .featured-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            font-size: 0.75em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .featured-link {
+            display: inline-block;
+            background: white;
+            color: #6B182C;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+            cursor: pointer;
+        }
+
+        .featured-link:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* CARRUSEL */
+        .carousel-section {
+            margin: 150px 0;
+            padding: 80px 0;
+            border-top: 3px solid #1a1a1a;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 60px auto 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 20px;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .carousel-slide.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .slide-content {
+            background: #1a1a1a;
+            color: white;
+            padding: 50px;
+            position: relative;
+            border-left: 4px solid #6B182C;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .slide-text {
+            flex: 1;
+        }
+
+        .slide-number {
+            font-size: 0.75em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .slide-title {
+            font-size: 2em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .slide-desc {
+            font-size: 0.95em;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .slide-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .slide-tag {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            border: 1px solid rgba(107, 24, 44, 0.5);
+        }
+
+        .slide-link {
+            display: inline-block;
+            background: white;
+            color: #1a1a1a;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+            cursor: pointer;
+        }
+
+        .slide-link:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .slide-preview {
+            width: 280px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(107, 24, 44, 0.1), rgba(29, 158, 62, 0.1));
+            border: 2px dashed rgba(107, 24, 44, 0.3);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 2.5em;
+        }
+
+        .slide-preview-text {
+            font-size: 0.7em;
+            color: #999;
+            text-align: center;
+        }
+
+        .carousel-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .carousel-btn {
+            background: #1a1a1a;
+            border: 2px solid #1a1a1a;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            color: #1a1a1a;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .indicator.active {
+            background: #1a1a1a;
+            transform: scale(1.3);
+        }
+
+        .certs-section {
+            margin-top: 150px;
+            padding-top: 80px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .cert-box {
+            padding: 40px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #6B182C, #1D9E3E);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .cert-box:hover {
+            border-color: #1a1a1a;
+            transform: translateY(-5px);
+        }
+
+        .cert-box:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cert-emoji {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .cert-name {
+            font-size: 1.1em;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .cert-academy {
+            font-size: 0.85em;
+            color: #999;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .cert-desc {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .cert-date {
+            font-size: 0.8em;
+            color: #1D9E3E;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        footer {
+            margin-top: 100px;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+                word-spacing: normal;
+            }
+
+            .slide-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .slide-preview {
+                width: 100%;
+            }
+
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .project-featured {
+                padding: 40px 25px;
+                clip-path: none;
+            }
+
+            .featured-title {
+                font-size: 1.8em;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- ========================================
-         HEADER: Encabezado con título principal
-    ======================================== ->
-    <header class="header-section">
-        <div class="container text-center">
-            <h1>Portafolio de Natalia</h1>
-            <p>Bienvenida a mi portafolio</p>
-        </div>
-    </header>
+    <div class="container">
+        <header>
+            <div class="header-tag">Portafolio-Natalia Esquivel</div>
+            <h1>DATA</h1>
+            <p class="header-subtitle">Proyectos y certificaciones de Academia Data - Natalia Esquivel</p>
+        </header>
 
-    <!-- ========================================
-         SECCIÓN PRINCIPAL: Carrusel de proyectos
-    ======================================== -->
-    <section class="content-section">
-        <div class="container">
-            <!-- Título de la sección -->
-            <h2 class="section-title">Explora los siguientes proyectos</h2>
+        <div class="projects-wrapper">
+            <h2 class="section-heading">Destacado</h2>
             
-            <!-- CARRUSEL DE BOOTSTRAP
-                 id="projectCarousel" - Identificador único para JavaScript
-                 data-bs-ride="carousel" - Hace que el carrusel sea automático
-            -->
-            <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
-                
-                <!-- INDICADORES (puntos debajo del carrusel)
-                     data-bs-slide-to="0" indica el número de slide (empieza en 0)
-                -->
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active"></button>
-                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2"></button>
-                    <!-- PARA AGREGAR MÁS PROYECTOS: Copia esta línea y cambia data-bs-slide-to="3", "4", etc. -->
+            <div class="project-featured">
+                <div class="featured-label">⭐ Proyecto Principal</div>
+                <h3 class="featured-title">ETL Pipeline</h3>
+                <p class="featured-desc">Desarrollo de pipeline completo para extracción, transformación y carga de datos desde múltiples fuentes. Automatización de procesos, validación de calidad y optimización de carga en BD.</p>
+                <div class="featured-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">AWS Cloud</span>
+                    <span class="tag">Automatización</span>
                 </div>
-                
-                <!-- CONTENEDOR DE SLIDES -->
-                <div class="carousel-inner">
-                    
-                    <!-- ===== PROYECTO 1 ===== 
-                         class="active" indica que este es el slide inicial
-                    -->
-                    <div class="carousel-item active">
-                        <div class="project-card">
-                            <h3>Tarea 1</h3>
-                            <p>Descripción de la instalación en Ubuntu de programas requeridos</p>
-                            <!-- IMPORTANTE: Cambia href="#" por tu URL real -->
-                            <a href="https://github.com/Natalia1445/aws-data-Natalia/blob/main/README.md" class="project-link">Ver Proyecto</a>
-                        </div>
-                    </div>
-                    
-                    <!-- ===== PROYECTO 2 ===== -->
-                    <div class="carousel-item">
-                        <div class="project-card">
-                            <h3>Tarea 2</h3>
-                            <p>Trabajo en equipo: Realización de calculadora en Python, que cuenta con validaciones y operaciones básicas.</p>
-                            <!-- IMPORTANTE: Cambia href="#" por tu URL real -->
-                            <a href="#" class="project-link">Ver Proyecto</a>
-                        </div>
-                    </div>
-                    
-                    <!-- ===== PROYECTO 3 ===== -->
-                    <div class="carousel-item">
-                        <div class="project-card">
-                            <h3>Tarea 3</h3>
-                            <p>Proyecto Análsis de datos sobre la adicción a redes sociales por parte de estudiantes</p>
-                            <!-- IMPORTANTE: Cambia href="#" por tu URL real -->
-                            <a href="https://github.com/Natalia1445/aws-data-Natalia/blob/main/An%C3%A1lisisDF1-NataliaEsquivel.html" class="project-link">Ver Proyecto</a>
+                <a href="#" class="featured-link">Ver Proyecto →</a>
+            </div>
+
+            <h2 class="section-heading">Galería de Proyectos</h2>
+            
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="carousel-slide active">
+                        <div class="slide-content">
+                            <div class="slide-text">
+                                <div class="slide-number">Proyecto 01</div>
+                                <h3 class="slide-title">Análisis de Ventas</h3>
+                                <p class="slide-desc">EDA completo con estadísticas descriptivas, detección de patrones y visualizaciones interactivas en dataset de ventas reales.</p>
+                                <div class="slide-tags">
+                                    <span class="slide-tag">Python</span>
+                                    <span class="slide-tag">Pandas</span>
+                                    <span class="slide-tag">Matplotlib</span>
+                                </div>
+                                <a href="#" class="slide-link">Ver Proyecto →</a>
+                            </div>
+                            <div class="slide-preview">
+                                📊
+                                <div class="slide-preview-text">Preview</div>
+                            </div>
                         </div>
                     </div>
 
-                     <!-- ===== PROYECTO 4 ===== -->
-                    <div class="carousel-item">
-                        <div class="project-card">
-                            <h3>Tarea 4</h3>
-                            <p>Niveles gratuitos de CodeCombat en Python</p>
-                      <!-- IMPORTANTE: Cambia href="#" por tu URL real -->
-                            <a href="https://github.com/Natalia1445/aws-data-Natalia/blob/main/CodeCombat_NataliaEsquivel.PNG" class="project-link">Ver Proyecto</a>
+                    <div class="carousel-slide">
+                        <div class="slide-content">
+                            <div class="slide-text">
+                                <div class="slide-number">Proyecto 02</div>
+                                <h3 class="slide-title">Modelo Predictivo</h3>
+                                <p class="slide-desc">Machine Learning con validación cruzada, tuning de hiperparámetros y evaluación exhaustiva de métricas de desempeño.</p>
+                                <div class="slide-tags">
+                                    <span class="slide-tag">Scikit-learn</span>
+                                    <span class="slide-tag">ML</span>
+                                    <span class="slide-tag">Python</span>
+                                </div>
+                                <a href="#" class="slide-link">Ver Proyecto →</a>
+                            </div>
+                            <div class="slide-preview">
+                                🤖
+                                <div class="slide-preview-text">Preview</div>
+                            </div>
                         </div>
                     </div>
 
-                    
-                     <!-- ===== PROYECTO 5 ===== -->
-                    <div class="carousel-item">
-                        <div class="project-card">
-                            <h3>Tarea 5</h3>
-                            <p>Dashboard de Adicción a Redes, realizado mediante Streamlit</p>
-                      <!-- IMPORTANTE: Cambia href="#" por tu URL real -->
-                            <a href="https://github.com/Natalia1445/aws-data-Natalia/blob/main/adiccion_redes.html" class="project-link">Ver Proyecto</a>
+                    <div class="carousel-slide">
+                        <div class="slide-content">
+                            <div class="slide-text">
+                                <div class="slide-number">Proyecto 03</div>
+                                <h3 class="slide-title">Dashboard Interactivo</h3>
+                                <p class="slide-desc">Dashboard visual con KPIs dinámicos, filtros interactivos y análisis en tiempo real de datos de negocio.</p>
+                                <div class="slide-tags">
+                                    <span class="slide-tag">Power BI</span>
+                                    <span class="slide-tag">DAX</span>
+                                    <span class="slide-tag">SQL</span>
+                                </div>
+                                <a href="#" class="slide-link">Ver Proyecto →</a>
+                            </div>
+                            <div class="slide-preview">
+                                📈
+                                <div class="slide-preview-text">Preview</div>
+                            </div>
                         </div>
                     </div>
 
-                    
-                     <!-- ===== PROYECTO 6 ===== -->
-                    <div class="carousel-item">
-                        <div class="project-card">
-                            <h3>Tarea 6</h3>
-                            <p>Monitoreo de status de servidores </p>
-                      <!-- IMPORTANTE: Cambia href="#" por tu URL real -->
-                            <a href="https://github.com/Natalia1445/aws-data-Natalia/blob/main/ETL-Status.PNG" class="project-link">Ver Proyecto</a>
+                    <div class="carousel-slide">
+                        <div class="slide-content">
+                            <div class="slide-text">
+                                <div class="slide-number">Proyecto 04</div>
+                                <h3 class="slide-title">Análisis Estadístico</h3>
+                                <p class="slide-desc">Pruebas estadísticas avanzadas, análisis de correlación, regresión e inferencia con interpretación detallada de resultados.</p>
+                                <div class="slide-tags">
+                                    <span class="slide-tag">Estadística</span>
+                                    <span class="slide-tag">SciPy</span>
+                                    <span class="slide-tag">Python</span>
+                                </div>
+                                <a href="#" class="slide-link">Ver Proyecto →</a>
+                            </div>
+                            <div class="slide-preview">
+                                📉
+                                <div class="slide-preview-text">Preview</div>
+                            </div>
                         </div>
                     </div>
-                    
-                    
-                    
-                    <!-- PARA AGREGAR MÁS PROYECTOS:
-                         Copia todo el bloque desde <div class="carousel-item"> hasta </div>
-                         y pégalo aquí debajo. Recuerda NO poner class="active"
-                         
-                         Ejemplo:
-                         <div class="carousel-item">
-                             <div class="project-card">
-                                 <h3>Proyecto 4</h3>
-                                 <p>Descripción del cuarto proyecto</p>
-                                 <a href="TU-LINK-AQUI" class="project-link">Ver Proyecto</a>
-                             </div>
-                         </div>
-                    -->
+
+                    <div class="carousel-slide">
+                        <div class="slide-content">
+                            <div class="slide-text">
+                                <div class="slide-number">Proyecto 05</div>
+                                <h3 class="slide-title">Consultas SQL</h3>
+                                <p class="slide-desc">Queries optimizadas, vistas complejas, stored procedures y análisis de grandes volúmenes de datos.</p>
+                                <div class="slide-tags">
+                                    <span class="slide-tag">SQL</span>
+                                    <span class="slide-tag">PostgreSQL</span>
+                                    <span class="slide-tag">Bases de Datos</span>
+                                </div>
+                                <a href="#" class="slide-link">Ver Proyecto →</a>
+                            </div>
+                            <div class="slide-preview">
+                                💾
+                                <div class="slide-preview-text">Preview</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <!-- BOTÓN ANTERIOR (flecha izquierda) -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                    <span class="visually-hidden">Anterior</span>
-                </button>
-                
-                <!-- BOTÓN SIGUIENTE (flecha derecha) -->
-                <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                    <span class="visually-hidden">Siguiente</span>
-                </button>
+            </div>
+
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prevBtn">←</button>
+                <button class="carousel-btn" id="nextBtn">→</button>
+            </div>
+
+            <div class="carousel-indicators">
+                <span class="indicator active" data-slide="0"></span>
+                <span class="indicator" data-slide="1"></span>
+                <span class="indicator" data-slide="2"></span>
+                <span class="indicator" data-slide="3"></span>
+                <span class="indicator" data-slide="4"></span>
             </div>
         </div>
-    </section>
 
-    <!-- Bootstrap JavaScript - Necesario para que funcione el carrusel -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <section class="certs-section">
+            <h2 class="section-heading">Certificaciones</h2>
+            
+            <div class="certs-grid">
+                <div class="cert-box">
+                    <div class="cert-emoji">📊</div>
+                    <h3 class="cert-name">Data Engineering on AWS - Foundations</h3>
+                    <p class="cert-academy">AWS Training & Certification</p>
+                 <a href="https://github.com/Natalia1445/aws-data-Natalia/blob/main/images/AWSDataEngineering.pdf" target="_blank" class="cert-link">Ver Certificado →</a>
+                    <div class="cert-date">2025</div>
+                </div>
+
+                <div class="cert-box">
+                    <div class="cert-emoji">📊</div>
+                    <h3 class="cert-name">AWS Well-Architected
+Foundations</h3>
+                    <p class="cert-academy">AWS Training & Certification</p>
+                    <a href="https://github.com/Natalia1445/aws-data-Natalia/blob/main/images/AWSWellArchitected%20Foundations.pdf" target="_blank" class="cert-link">Ver Certificado →</a>
+                    <div class="cert-date">2025</div>
+                </div>
+
+                <div class="cert-box">
+                    <div class="cert-emoji">📊</div>
+                    <h3 class="cert-name">AWS Cloud Practitioner
+EssentialsL</h3>
+                    <p class="cert-academy">AWS Training & Certification</p>
+                    <a href="https://github.com/Natalia1445/aws-data-Natalia/blob/main/images/AWSCloudPractitionerEssentials.pdf" target="_blank" class="cert-link">Ver Certificado →</a>
+                    <div class="cert-date">2025</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Academia Data © 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[n].classList.add('active');
+            indicators[n].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', nextSlide);
+        document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+    </script>
 </body>
 </html>
